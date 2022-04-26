@@ -14,7 +14,7 @@ public class CameraDragMove : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             _difference = generalCamera.ScreenToWorldPoint(Input.mousePosition) - generalCamera.transform.position;
             if (_isDragged == false)

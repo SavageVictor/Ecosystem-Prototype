@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] private Tilemap[] tilemap;
+    [SerializeField] private Tilemap tilemap;
     [SerializeField] private Camera generalCamera;
     [SerializeField] private List<WorldTile> _tileDatas;
 
@@ -27,11 +27,11 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = generalCamera.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int gridPos = tilemap[1].WorldToCell(mousePos);
-            TileBase clickedTileBase = tilemap[1].GetTile(gridPos);
+            Vector3Int gridPos = tilemap.WorldToCell(mousePos);
+            TileBase clickedTileBase = tilemap.GetTile(gridPos);
 
             bool isPassable = _dataFromTiles[clickedTileBase].isPassable;
             
