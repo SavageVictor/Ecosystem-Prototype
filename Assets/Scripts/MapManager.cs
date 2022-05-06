@@ -11,7 +11,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Camera generalCamera;
     [SerializeField] private List<WorldTile> _tileDatas;
     
-    [SerializeField] SpawnableThings _spawnableThing;
+    [SerializeField] GameObject _iniPlant;
 
     private Dictionary<TileBase, WorldTile> _dataFromTiles;
 
@@ -46,7 +46,7 @@ public class MapManager : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0) && spawnMode && isPassable)
         {
-            Instantiate(_spawnableThing.prefab, mousePos, Quaternion.identity);
+            Instantiate(_iniPlant, mousePos, Quaternion.identity);
         }
     }
 
