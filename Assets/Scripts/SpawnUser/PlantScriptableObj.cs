@@ -18,8 +18,13 @@ public class PlantScriptableObj : MonoBehaviour
     //private bool _isGrowing;
     
     private int _growingTime = 0;
+    
+    int distance = 0;
 
     private SpriteRenderer _spriteRenderer;
+
+    private GameObject _mapManagerGameObject;
+    private MapManager _mapManagerInstance;
 
     private void Start()
     {
@@ -30,7 +35,10 @@ public class PlantScriptableObj : MonoBehaviour
 
         GameObject tilemapGameObj = GameObject.Find("Ground");
         _tilemap = tilemapGameObj.GetComponent<Tilemap>();
-        SetTiles();
+
+        _mapManagerGameObject = GameObject.Find("MapManager");
+        _mapManagerInstance = _mapManagerGameObject.GetComponent<MapManager>();
+        //SetTiles();
     }
 
     private void Update()
@@ -47,27 +55,32 @@ public class PlantScriptableObj : MonoBehaviour
     {
         
         Vector3Int gridPos = _tilemap.WorldToCell(transform.position);
-        int distance = 1;
-        int max_distance = 5;
+        
+        distance++;
+        int max_distance = 3;
         for (int i = gridPos.x - distance; i < gridPos.x + distance; i++)
         {
-            for (int j = gridPos.y - distance; i < gridPos.y + distance; i++)
+            for (int j = gridPos.y - distance; j < gridPos.y + distance; j++)
             {
                 if((Mathf.Abs(gridPos.x - i) + Mathf.Abs(gridPos.y - j)) <= distance && distance <= max_distance)
                 {
-                    //TileBase currentTileBase = _tilemap.GetTile(new Vector3Int(i,j,0));
-                    _tilemap.SetTile(new Vector3Int(i,j,0), grassTile);
-                    distance++;
-                }
 
+                    if (_mapManagerInstance.TileIsPassable(new Vector3Int(i, j, 0)))
+                    {
+                        _tilemap.SetTile(new Vector3Int(i,j,0), grassTile);
+                    
+                        Debug.Log(new Vector2(i,j));
+                    }
+                    //TileBase currentTileBase = _tilemap.GetTile(new Vector3Int(i,j,0));
+                }
             }
         }
     }
 
 
-
     private void TimeTickSys_OnTick(object sender, TimeTickSys.OnTickEventsArgs e)
     {
         _growingTime++;
+        SetTiles();
     }
 }

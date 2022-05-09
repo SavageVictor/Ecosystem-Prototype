@@ -36,18 +36,26 @@ public class MapManager : MonoBehaviour
         Vector2 mousePos = generalCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int gridPos = tilemap.WorldToCell(mousePos);
         TileBase clickedTileBase = tilemap.GetTile(gridPos);
+        //TileBase clickedTileBase = tilemap.GetTile(gridPos);
 
-        bool isPassable = _dataFromTiles[clickedTileBase].isPassable;
+        //bool isPassable = _dataFromTiles[clickedTileBase].isPassable;
         
         if (Input.GetMouseButtonDown(0) && checkInfoMode)
         {
-            print( clickedTileBase + "is passable:" + isPassable);
+            print( clickedTileBase + "is passable:" + TileIsPassable(gridPos));
         }
         
-        if (Input.GetMouseButtonDown(0) && spawnMode && isPassable)
+        if (Input.GetMouseButtonDown(0) && spawnMode && TileIsPassable(gridPos))
         {
             Instantiate(_iniPlant, mousePos, Quaternion.identity);
         }
+    }
+
+    public bool TileIsPassable(Vector3Int tileCoords)
+    {
+        TileBase neededTile = tilemap.GetTile(tileCoords);
+        bool isPassable = _dataFromTiles[neededTile].isPassable;
+        return isPassable;
     }
 
     public void SpawnModeToggle()
