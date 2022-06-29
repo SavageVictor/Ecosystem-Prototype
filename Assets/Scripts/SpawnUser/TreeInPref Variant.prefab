@@ -63,5 +63,55 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreeInPref Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5299371810614019314, guid: eac4bbe8cdd281a4192c4f64729d260c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eac4bbe8cdd281a4192c4f64729d260c, type: 3}
+--- !u!1 &5062258621424693157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4414051605696090065, guid: eac4bbe8cdd281a4192c4f64729d260c, type: 3}
+  m_PrefabInstance: {fileID: 8863398429597851764}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &8431962020735296685
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5062258621424693157}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.16492558, y: 13.7191515}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.01}
+    oldSize: {x: 20.180002, y: 61.48704}
+    newSize: {x: 20.180002, y: 61.48704}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 20.179995, y: 29.657553}
+  m_EdgeRadius: 0
+--- !u!114 &7346392796831145606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5062258621424693157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e788de87cb5cc654bacb445fdbba2b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tilemap: {fileID: 0}
+  grassTile: {fileID: 11400000, guid: 6f0a833d95fb8c147b6feb5dec647c51, type: 2}
+  dirtTile: {fileID: 11400000, guid: 0a57b927de4c4b94a82386425b13901a, type: 2}

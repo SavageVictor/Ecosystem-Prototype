@@ -7,9 +7,6 @@ using UnityEngine.Tilemaps;
 
 public class PlantScriptableObj : MonoBehaviour
 {
-    [SerializeField] private Tilemap _tilemap;
-    [SerializeField] private TileBase grassTile;
-    
     public List<Sprite> plantGrowthStages;
     public int ticksToStage = 200;
     //public Transform initialPlantPrefab;
@@ -18,13 +15,19 @@ public class PlantScriptableObj : MonoBehaviour
     //private bool _isGrowing;
     
     private int _growingTime = 0;
-    
-    int distance = 0;
 
     private SpriteRenderer _spriteRenderer;
 
     private GameObject _mapManagerGameObject;
     private MapManager _mapManagerInstance;
+    private GameObject _gameManagerGameObject;
+    private GameManager _gameManagerInstance;
+
+    private ScriptableObject _scriptableObjectToTurnOff;
+
+    [SerializeField] private int pointsReceived = 10;
+
+    
 
     private void Start()
     {
@@ -33,15 +36,16 @@ public class PlantScriptableObj : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = plantGrowthStages[_currentStage];
 
-        GameObject tilemapGameObj = GameObject.Find("Ground");
-        _tilemap = tilemapGameObj.GetComponent<Tilemap>();
-
         _mapManagerGameObject = GameObject.Find("MapManager");
         _mapManagerInstance = _mapManagerGameObject.GetComponent<MapManager>();
-        //SetTiles();
+
+        _gameManagerGameObject = GameObject.Find("GameManager");
+        _gameManagerInstance = _gameManagerGameObject.GetComponent<GameManager>();
+
+//        _scriptableObjectToTurnOff = GetComponent<ScriptableObject>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_growingTime >= ticksToStage && _currentStage < plantGrowthStages.Count - 1 )
         {
@@ -49,38 +53,20 @@ public class PlantScriptableObj : MonoBehaviour
             _growingTime = 0;
             _spriteRenderer.sprite = plantGrowthStages[_currentStage];
         }
-    }
 
-    private void SetTiles()
-    {
-        
-        Vector3Int gridPos = _tilemap.WorldToCell(transform.position);
-        
-        distance++;
-        int max_distance = 3;
-        for (int i = gridPos.x - distance; i < gridPos.x + distance; i++)
+        if (_currentStage == plantGrowthStages.Count - 1)
         {
-            for (int j = gridPos.y - distance; j < gridPos.y + distance; j++)
-            {
-                if((Mathf.Abs(gridPos.x - i) + Mathf.Abs(gridPos.y - j)) <= distance && distance <= max_distance)
-                {
-
-                    if (_mapManagerInstance.TileIsPassable(new Vector3Int(i, j, 0)))
-                    {
-                        _tilemap.SetTile(new Vector3Int(i,j,0), grassTile);
-                    
-                        Debug.Log(new Vector2(i,j));
-                    }
-                    //TileBase currentTileBase = _tilemap.GetTile(new Vector3Int(i,j,0));
-                }
-            }
+            _gameManagerInstance.plantFullyGrown = true;
         }
     }
-
-
+    
+    private void OnMouseDown()
+    {
+        _gameManagerInstance.score += pointsReceived;
+    }
+    
     private void TimeTickSys_OnTick(object sender, TimeTickSys.OnTickEventsArgs e)
     {
         _growingTime++;
-        SetTiles();
     }
 }

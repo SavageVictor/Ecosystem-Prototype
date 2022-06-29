@@ -46,7 +46,7 @@ public class TimeTickSys : MonoBehaviour
             DispInfo.text = "Ticks Passed: " + _tick;
         }
         
-        
+        /*
         TPS_timer += Time.deltaTime;
         if (TPS_timer >= 1)
         {
@@ -54,6 +54,6 @@ public class TimeTickSys : MonoBehaviour
             TPS = 0;
             TPS_timer = 0;
         }
-        
+        */
     }
 }
