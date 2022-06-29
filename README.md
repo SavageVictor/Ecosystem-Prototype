@@ -1,4 +1,4 @@
-# Ecosystem-Prototype
+# Project Desertification
 
 Exam project at KPI
 Easy game, just destroy as many damn trees as possible, and don't let em grow to their full size.
